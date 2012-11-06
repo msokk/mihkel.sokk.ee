@@ -1,0 +1,91 @@
+/* Entypo pictograms by Daniel Bruce — www.entypo.com */
+@font-face {
+  font-family: 'Entypo Social';
+  src: url('entypo-social.eot?#iefix') format('embedded-opentype'),
+       url('entypo-social.woff') format('woff'),
+       url('entypo-social.ttf')  format('truetype'),
+       url('entypo-social.svg#entypo-social') format('svg');
+}
+
+
+* { margin: 0; padding: 0px; }
+body {
+  overflow: hidden;
+  background: black url(../img/bg_1920.jpg) no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  vertical-align: top;
+  text-decoration: none;
+  line-height: 32px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: white;
+}
+
+i.icon {
+  display: inline-block;
+  font-style: normal;
+  font-size: 32px;
+  font-family: 'Entypo Social', sans-serif;
+  line-height: 1;
+}
+
+i.icon.github::before {
+  content: "\f300";
+}
+
+i.icon.twitter::before {
+  content: "\f309";
+}
+
+i.icon.linkedin::before {
+  content: "\f318";
+}
+
+a i.icon {
+  padding-right: 3px;
+}
+
+
+#about {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  margin-left: -270px;
+
+  padding: 20px;
+  width: 500px;
+
+  border: solid 1px #666;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, .5);
+  text-align: center;
+  opacity: 0;
+  -webkit-transition: opacity 1.2s ease-in-out;
+  -moz-transition: opacity 1.2s ease-in-out;
+
+  transition: opacity 1.2s ease-in-out;
+}
+
+#about.active, #about:hover {
+  opacity: 1;
+}
+
+#star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  background-color: white;
+  box-shadow: 0 0 5px 1px white;
+}
