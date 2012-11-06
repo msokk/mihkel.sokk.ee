@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Covert Art Animata</title>
+    <link href='http://fonts.googleapis.com/css?family=Quattrocento' rel='stylesheet' type='text/css'>
+    <style>
+      * { margin: 0; padding: 0px; }
+
+      .cover { width: 700px; height: 700px;  }
+
+      #sei-a-white-rainbow {
+        position: relative;
+        background-color: rgba(28, 28, 26, 1.0);
+      }
+
+      #sei-a-white-rainbow .canvas {
+        width: 300px;
+        padding: 60px 0;
+        margin: auto;
+      }
+
+      #sei-a-white-rainbow .txt {
+        color: white;
+        font-family: 'Quattrocento', serif;
+        font-weight: 400;
+        line-height: 30px;
+        top: 60px;
+        font-size: 30px;
+        position: absolute;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="cover-list">
+      <div class="cover" id="sei-a-white-rainbow">
+        <div class="txt" style="left: 18%">sei a</div>
+        <div class="txt" style="right: 11%">white<br>rainbow</div>
+        <div class="txt" style="right: 16%; top: 87%">turbo</div>
+        <div class="txt" style="left: 51%; top: 93%">029</div>
+        <div class="canvas"><canvas id="plane" width="300" height="580"></canvas></div>
+      </div>
+    </div>
+    <script>
+      var canvas = document.getElementById('plane');
+      var ctx = canvas.getContext('2d');
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+      ctx.fillStyle = 'black';
+      var W = canvas.width;
+      var H = canvas.height;
+
+      Math.randRange = function(from, to) {
+        return from + Math.random() * (to - from);
+      }
+
+      ctx.fillCircle = function(x, y, r) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI*2, true);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      ctx.strokeCircle = function(x, y, r) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI*2, true);
+        ctx.closePath();
+        ctx.stroke();
+      };
+
+      ctx.makeLine = function(x0, y0, x1, y1) {
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x1, y1);
+        ctx.stroke();
+      };
+
+      var blank = function() {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = 'black';
+      };
+
+
+      var draw = function() {
+
+        var generator = (Date.now() % 20000) / 20000;
+
+        ctx.lineWidth = 1.5;
+        ctx.strokeCircle(W/2, 45, 35);
+
+        ctx.strokeCircle(W/2, H - 150, 120);
+
+        for(var i = 1; i < 7; i++) {
+          var x = W/2 + (Math.sin(i * (Math.PI*2) * generator) * 120);
+          var y = H - 150 + (Math.cos(i * (Math.PI*2) * generator) * 120);
+          ctx.fillCircle(x, y, 20);
+
+        }
+
+        ctx.fillStyle = 'white';
+        ctx.fillCircle(W/2, H - 150, 120);
+
+        for(var i = 1; i < 7; i++) {
+          var x = W/2 + (Math.sin(i * (Math.PI*2) * generator) * 120);
+          var y = H - 150 + (Math.cos(i + (Math.PI*2) * generator) * 120);
+
+          ctx.strokeCircle(x, y, 20);
+          ctx.makeLine(W/2, H-150, x-20, y);
+          ctx.makeLine(W/2, H-150, x+20, y);
+
+          ctx.makeLine(W/2 + 35, 45, x+20, y);
+          ctx.makeLine(W/2 - 35, 45, x-20, y);
+        }
+
+      };
+
+
+
+      function loop() {
+        blank();
+        draw();
+        webkitRequestAnimationFrame(loop);
+      };
+      loop();
+    </script>
+  </body>
+</html>

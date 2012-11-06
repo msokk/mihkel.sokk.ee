@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homepage proto</title>
+    <style>
+      * { margin: 0; padding: 0px; }
+      body { background: black; }
+    </style>
+  </head>
+  <body>
+    <canvas id="plane" width="600" height="600"></canvas>
+    <script>
+      var canvas = document.getElementById('plane');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight - 5; //WHY?
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width;
+      var H = canvas.height;
+
+      Math.randRange = function(from, to) {
+        return from + Math.random() * (to - from);
+      }
+
+      var particleCount = 100;
+      var velocity = 1;
+      var lineWidth = .1;
+
+      var particles = [];
+
+      var blank = function() {
+        ctx.fillStyle = 'rgba(0, 0, 0, .5)';
+        ctx.fillRect(0, 0, W, H);
+      };
+
+
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, W, H);
+
+      var distance = function(p1, p2) {
+        var dx = Math.abs(p1.x - p2.x);
+        var dy = Math.abs(p1.y - p2.y);
+        return Math.sqrt(dx * dx + dy * dy);
+      };
+
+      var getAngledGradient = function(p0, p1, w) {
+        var r = w / 2.0;
+        var p2 = {x: p0.x, y: p1.y};
+        var d1 = distance(p0, p2);
+        var d2 = distance(p0, p1);
+        var d = (d1 > d2)? d2 / d1: d1 / d2;
+
+        var dx = Math.ceil(Math.sin(d) * r);
+        var dy = Math.floor(Math.cos(d) * r);
+        ctx.fillStyle = 'blue'
+
+
+        ctx.fillRect(p0.x - dx, p0.y + dy, 2,2)
+        ctx.fillRect(p0.x + dx, p0.y - dy, 2,2)
+        return ctx.createLinearGradient(p0.x - dx, p0.y + dy, p0.x + dx, p0.y - dy);
+      };
+
+      var Particle = function() {
+        this.spawn();
+      };
+
+      Particle.prototype.spawn = function() {
+        this.hue = Math.randRange(0, 360);
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.vx = Math.randRange(-velocity, velocity);
+        this.vy = Math.randRange(-velocity, velocity);
+      };
+
+      Particle.prototype.draw = function() {
+      };
+
+
+      Particle.prototype.update = function() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if(!(this.x > 0 && this.x < W && this.y > 0 && this.y < H)) {
+          this.spawn();
+        }
+        ctx.strokeStyle = 'white';
+        for(var i = 0; i < particleCount; i++) {
+          if(this == particles[i]) {
+            continue;
+          }
+
+          var d = distance(this, particles[i]);
+          if(d < 100) {
+            /*var g = getAngledGradient(this, particles[i], lineWidth);
+            g.addColorStop(.1, 'red');
+            g.addColorStop(.2, 'black');
+            g.addColorStop(.8, 'black');
+            g.addColorStop(.9, 'cyan');*/
+
+            ctx.strokeStyle = 'hsl(' + this.hue + ', 100%, 70%)';
+
+            ctx.lineWidth = lineWidth;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(particles[i].x, particles[i].y);
+            ctx.closePath();
+            ctx.stroke();
+          }
+        }
+
+      };
+
+      for(var i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+
+      var draw = function() {
+        for(var i = 0; i < particleCount; i++) {
+          particles[i].draw();
+          particles[i].update();
+        }
+      };
+
+
+
+      function loop() {
+        blank();
+        draw();
+        webkitRequestAnimationFrame(loop);
+      };
+      loop();
+    </script>
+  </body>
+</html>
