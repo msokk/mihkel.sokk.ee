@@ -1,8 +1,13 @@
 /**
- * Deep, deep in WIP!
+ * SKETCH: "Where are we going" + Contact info
+ * Three.js + Threex + Tween.js - Thanks Mr.doob and J. Etienne!
+ *
+ * Still deeply in WIP!
  */
+
 if(!Detector.webgl) Detector.addGetWebGLMessage();
 
+// Variables setup
 var w = window.innerWidth
   , h = oldH = window.innerHeight
   , scene = new THREE.Scene()
@@ -14,10 +19,13 @@ var tilt = 0.41,
     radius = 45,
     stopped = false;
 
+
+// Fix FOV on window resize
 var tanFOV = Math.tan( ( ( Math.PI / 180 ) * camera.fov / 2 ) );
 
-
 scene.add(camera);
+
+// Attach event handler
 THREE.Object3D._threexDomEvent.camera(camera);
 
 camera.position.z = 100;
@@ -26,24 +34,26 @@ document.body.appendChild(renderer.domElement);
 
 
 
-
 var planetTexture = THREE.ImageUtils.loadTexture('img/texture/earth_night_2048.jpg')
   , cloudsTexture = THREE.ImageUtils.loadTexture('img/texture/earth_clouds_1024.png');
 
-
-// Sphere
+// Planet
 var planet = new THREE.Mesh(
   new THREE.SphereGeometry(radius, 100, 50),
   new THREE.MeshLambertMaterial({color: 0xFFFFFF, map: planetTexture})
 );
+
 planet.rotation.z = tilt;
 scene.add(planet);
 
+
+// Hover animations
 planet.on('mouseover', function() {
   if(window.zoomOutTween) window.zoomOutTween.stop();
   stopped = true;
   clock.stop();
 
+  // TODO: Tween with THREE.Vector3 ?
   var tween = window.zoomInTween = new TWEEN.Tween({
     px: planet.rotation.x,
     py: planet.rotation.y,
@@ -57,7 +67,7 @@ planet.on('mouseover', function() {
     py: (planet.rotation.y - (planet.rotation.y % 6.28)) + 4.28,
     pz: 0,
     cx: 1.035,
-    cy: (planet.rotation.y - (planet.rotation.y % 6.28)) + 4.28,
+    cy: (clouds.rotation.y - (clouds.rotation.y % 6.28)) + 4.28,
     cz: 0,
     co: .3
   }, 2500)
@@ -103,12 +113,15 @@ planet.on('mouseout', function() {
     cloudMaterial.opacity = this.co;
 
   }).onComplete(function() {
+
     document.getElementById('about').className = '';
 
   }).start();
 
 });
 
+
+// Lighting
 var pointLight = new THREE.PointLight(0xFFFFFF);
 pointLight.position.x = 10;
 pointLight.position.y = 50;
@@ -116,6 +129,7 @@ pointLight.position.z = 130;
 scene.add(pointLight);
 
 
+// Clouds
 var cloudMaterial = new THREE.MeshLambertMaterial({
   color: 0xffffff,
   map: cloudsTexture,
@@ -126,13 +140,13 @@ var clouds = new THREE.Mesh(
   new THREE.SphereGeometry(radius, 100, 50),
   cloudMaterial
 );
+
 clouds.rotation.z = tilt;
 clouds.scale.set(1.005, 1.005, 1.005);
 scene.add(clouds);
 
-// SETUP END
 
-animate();
+// Animate the scene
 function animate() {
   requestAnimationFrame(animate);
 
@@ -140,22 +154,49 @@ function animate() {
 
     var delta = clock.getDelta();
 
-
     planet.rotation.y += .1 * delta;
     clouds.rotation.y += .15 * delta;
   }
+
   renderer.render(scene, camera);
   TWEEN.update();
 }
+animate();
 
 
+// Reflow on resize
 window.addEventListener('resize', function() {
-  w = innerWidth;
-  h = innerHeight;
+  w = window.innerWidth;
+  h = window.innerHeight;
 
   camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( h / oldH ) );
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
 
   renderer.setSize(w, h);
+}, false);
+
+
+// Stop the clock on page hide and viceversa
+var hidden, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+    hidden = "hidden";
+    visibilityChange = "visibilitychange";
+} else if (typeof document.mozHidden !== "undefined") {
+    hidden = "mozHidden";
+    visibilityChange = "mozvisibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden";
+    visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+    hidden = "webkitHidden";
+    visibilityChange = "webkitvisibilitychange";
+}
+
+document.addEventListener(visibilityChange, function() {
+  if(document[hidden]) {
+    clock.stop();
+  } else {
+    clock.start();
+  }
 }, false);

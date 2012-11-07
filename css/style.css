@@ -17,17 +17,15 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-a {
-  vertical-align: top;
+#about a {
   text-decoration: none;
-  line-height: 32px;
 }
 
-a:hover {
+#about a:hover {
   text-decoration: underline;
 }
 
-a:visited {
+#about a:visited {
   color: white;
 }
 
@@ -78,14 +76,4 @@ a i.icon {
 
 #about.active, #about:hover {
   opacity: 1;
-}
-
-#star {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1px;
-  height: 1px;
-  background-color: white;
-  box-shadow: 0 0 5px 1px white;
 }
