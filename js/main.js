@@ -5,7 +5,13 @@
  * Still deeply in WIP!
  */
 
-if(!Detector.webgl) Detector.addGetWebGLMessage();
+// Show error msg and about if WebGL is missing
+if(!Detector.webgl) {
+  Detector.addGetWebGLMessage();
+  window.onload = function() {
+    document.getElementById('about').className = 'active';
+  };
+}
 
 // Variables setup
 var w = window.innerWidth

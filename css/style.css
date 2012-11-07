@@ -9,6 +9,7 @@
 
 
 * { margin: 0; padding: 0px; }
+ul { padding-left: 20px; list-style-type: square; }
 body {
   overflow: hidden;
   background: black url(../img/bg_1920.jpg) no-repeat center center fixed;
@@ -18,6 +19,7 @@ body {
 }
 
 #about a {
+  color: white;
   text-decoration: none;
 }
 
@@ -34,7 +36,8 @@ i.icon {
   font-style: normal;
   font-size: 32px;
   font-family: 'Entypo Social', sans-serif;
-  line-height: 1;
+  line-height: 19px;
+  vertical-align: bottom;
 }
 
 i.icon.github::before {
@@ -48,25 +51,52 @@ i.icon.twitter::before {
 i.icon.linkedin::before {
   content: "\f318";
 }
+i.icon.linkedin { line-height: 21px; }
+
+i.icon.skype::before {
+  content: "\f339";
+}
 
 a i.icon {
   padding-right: 3px;
 }
 
+#about .bigger {
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+#about img {
+  border-radius: 5px;
+}
+
+#about .section {
+  float: left;
+  padding: 5px;
+}
+
+#about #contacts {
+  clear: both;
+  text-align: center;
+}
+
+#about #contacts a {
+  font-size: 14px;
+  padding-right: 5px;
+}
 
 #about {
   position: absolute;
-  top: 75%;
+  top: 70%;
   left: 50%;
-  margin-left: -270px;
+  margin-left: -197px;
 
   padding: 20px;
-  width: 500px;
+  width: 355px;
 
   border: solid 1px #666;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, .5);
-  text-align: center;
   opacity: 0;
   -webkit-transition: opacity 1.2s ease-in-out;
   -moz-transition: opacity 1.2s ease-in-out;
