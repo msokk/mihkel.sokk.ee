@@ -62,7 +62,12 @@ a i.icon {
 }
 
 #about .bigger {
+  line-height: 30px;
   font-size: 32px;
+}
+
+#about #location {
+  font-size: 13px;
   margin-bottom: 5px;
 }
 
