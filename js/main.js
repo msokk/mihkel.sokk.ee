@@ -1,7 +1,7 @@
 /**
  * Deep, deep in WIP!
  */
-if(!Detector.webgl) { Detector.addGetWebGLMessage(); }
+if(!Detector.webgl) Detector.addGetWebGLMessage();
 
 var w = window.innerWidth
   , h = oldH = window.innerHeight
@@ -27,7 +27,7 @@ document.body.appendChild(renderer.domElement);
 
 
 
-var planetTexture = THREE.ImageUtils.loadTexture('img/texture/night8192.jpg')
+var planetTexture = THREE.ImageUtils.loadTexture('img/texture/earth_night_2048.jpg')
   , cloudsTexture = THREE.ImageUtils.loadTexture('img/texture/earth_clouds_1024.png');
 
 
@@ -40,7 +40,7 @@ planet.rotation.z = tilt;
 scene.add(planet);
 
 planet.on('mouseover', function() {
-  if(window.zoomOutTween) { window.zoomOutTween.stop(); }
+  if(window.zoomOutTween) window.zoomOutTween.stop();
   stopped = true;
   clock.stop();
 
@@ -54,10 +54,10 @@ planet.on('mouseover', function() {
     co: cloudMaterial.opacity
   }).to({
     px: 1.035,
-    py: (planet.rotation.x - (planet.rotation.x % 6.28)) + 4.28,
+    py: (planet.rotation.y - (planet.rotation.y % 6.28)) + 4.28,
     pz: 0,
     cx: 1.035,
-    cy: (planet.rotation.x - (planet.rotation.x % 9.42)) + 4.28,
+    cy: (planet.rotation.y - (planet.rotation.y % 6.28)) + 4.28,
     cz: 0,
     co: .3
   }, 2500)
@@ -130,6 +130,7 @@ clouds.rotation.z = tilt;
 clouds.scale.set(1.005, 1.005, 1.005);
 scene.add(clouds);
 
+// SETUP END
 
 animate();
 function animate() {
@@ -139,8 +140,9 @@ function animate() {
 
     var delta = clock.getDelta();
 
-    planet.rotation.y += 0.1 * delta;
-    clouds.rotation.y += 0.15 * delta;
+
+    planet.rotation.y += .1 * delta;
+    clouds.rotation.y += .15 * delta;
   }
   renderer.render(scene, camera);
   TWEEN.update();
