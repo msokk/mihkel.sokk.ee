@@ -58,7 +58,7 @@ i.icon.skype::before {
 }
 
 a i.icon {
-  padding-right: 3px;
+  padding-right: 4px;
 }
 
 #about .bigger {
@@ -104,6 +104,7 @@ a i.icon {
 
   border: solid 1px #666;
   border-radius: 5px;
+  background-color: #000;
   background-color: rgba(0, 0, 0, .5);
   opacity: 0;
   -webkit-transition: opacity 1.2s ease-in-out;
