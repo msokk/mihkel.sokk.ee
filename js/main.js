@@ -5,11 +5,13 @@
  * Still deeply in WIP!
  */
 
+var aboutBox = document.getElementById('about');
+
 // Show error msg and about if WebGL is missing
 if(!Detector.webgl) {
   Detector.addGetWebGLMessage();
   window.onload = function() {
-    document.getElementById('about').className = 'active';
+    aboutBox.className = 'active';
   };
 }
 
@@ -73,7 +75,7 @@ planet.on('mouseover', function() {
     py: (planet.rotation.y - (planet.rotation.y % 6.28)) + 4.28,
     pz: 0,
     cx: 1.035,
-    cy: (clouds.rotation.y - (clouds.rotation.y % 6.28)) + 4.28,
+    cy: (clouds.rotation.y - (clouds.rotation.y % 9.42)) + 4.28,
     cz: 0,
     co: .3
   }, 2500)
@@ -89,7 +91,7 @@ planet.on('mouseover', function() {
 
   }).start();
 
-  document.getElementById('about').className = 'active';
+  aboutBox.className = 'active';
 });
 
 planet.on('mouseout', function() {
@@ -120,7 +122,7 @@ planet.on('mouseout', function() {
 
   }).onComplete(function() {
 
-    document.getElementById('about').className = '';
+    aboutBox.className = '';
 
   }).start();
 
@@ -168,6 +170,8 @@ function animate() {
   TWEEN.update();
 }
 animate();
+
+
 
 
 // Reflow on resize
