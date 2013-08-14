@@ -2,38 +2,48 @@
 <html>
   <head>
     <title>Mihkel Sokk</title>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <script src="js/three.min.js"></script>
-    <script src="js/threex.domevent.js"></script>
-    <script src="js/threex.domevent.object3d.js"></script>
-    <script src="js/Detector.js"></script>
-    <script src="js/tween.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300,400' rel='stylesheet' type='text/css'>
+    <style>
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        color: white;
+        font-family: 'Raleway', sans-serif;
+      }
+
+      body, body:before {
+        margin: 0;
+        background: #efe url('island.jpg') no-repeat center center fixed;
+        background-size: cover;
+      }
+      body:before {
+        content: " ";
+        position: absolute;
+        width: 12em;
+        height: 100%;
+        z-index: -1;
+        -webkit-filter: blur(1px) hue-rotate(100deg) invert(90%);
+      }
+
+      aside {
+        padding: .2em;
+        font-size: 2em;
+        font-weight: 200;
+        float: left;
+        height: 100%;
+      }
+    </style>
   </head>
   <body>
-    <div id="about">
-      <div class="section">
-        <img src="http://www.gravatar.com/avatar/641886d7c0b8a475de815f429d9b3122?s=100" alt="Avatar" />
-      </div>
-      <div class="section">
-        <div class="bigger">Mihkel Sokk</div>
-        <div id="location">Tallinn, Estonia</div>
-        <ul>
-          <li>Ruby & JavaScript developer</li>
-          <li>Aspiring creative coder</li>
-        </ul>
-      </div>
-      <div id="contacts">
-        <a href="https://github.com/msokk"><i class="icon github"></i>GitHub</a>
-        <a href="https://twitter.com/mihkelsokk"><i class="icon twitter"></i>Twitter</a>
-        <a href="http://ee.linkedin.com/in/mihkelsokk"><i class="icon linkedin"></i>LinkedIn</a>
-        <a href="skype:mihkelsokk?userinfo"><i class="icon skype"></i>mihkelsokk</a>
-      </div>
-    </div>
+    <aside>
+      Mihkel Sokk
+    </aside>
 
     <script type="text/javascript">
-
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-18117326-6']);
       _gaq.push(['_trackPageview']);
@@ -43,9 +53,6 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-
     </script>
-    <script src="js/main.js"></script>
-
  </body>
 </html>
