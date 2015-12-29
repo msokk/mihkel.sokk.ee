@@ -2,57 +2,70 @@
 <html>
   <head>
     <title>Mihkel Sokk</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="favicon.ico">
-    <link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300,400' rel='stylesheet' type='text/css'>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Muli:400" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
     <style>
-      html, body {
-        height: 100%;
-        overflow: hidden;
-      }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-      body {
-        color: white;
-        font-family: 'Raleway', sans-serif;
-      }
+    body {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: end;
+      -webkit-align-items: flex-end;
+          -ms-flex-align: end;
+              align-items: flex-end;
+      color: white;
+      font-family: 'Avenir Next', 'Muli', sans-serif;
+      background: #efe url('island.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    main {
+      padding-bottom: 2em;
+    }
 
-      body, body:before {
-        margin: 0;
-        background: #efe url('island.jpg') no-repeat center center fixed;
-        background-size: cover;
-      }
-      body:before {
-        content: " ";
-        position: absolute;
-        width: 12em;
-        height: 100%;
-        z-index: -1;
-        -webkit-filter: blur(1px) hue-rotate(100deg) invert(90%);
-      }
+    a {
+      display: inline-block;
+      color: white;
+      padding: 2em;
+      -webkit-transition: -webkit-transform .2s ease-out;
+      transition: -webkit-transform .2s ease-out;
+      transition: transform .2s ease-out;
+      transition: transform .2s ease-out, -webkit-transform .2s ease-out;
+    }
 
-      aside {
-        padding: .2em;
-        font-size: 2em;
-        font-weight: 200;
-        float: left;
-        height: 100%;
-      }
+    a:hover {
+      -webkit-transform: scale(1.1);
+              transform: scale(1.1);
+    }
     </style>
   </head>
   <body>
-    <aside>
-      Mihkel Sokk
-    </aside>
+    <main>
+      <a href="https://github.com/msokk"><i class="fa fa-github-square fa-4x"></i></a>
+      <a href="https://twitter.com/mihkelsokk"><i class="fa fa-twitter-square fa-4x"></i></a>
+    </main>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-18117326-6']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+      ga('create', 'UA-18117326-6', 'auto');
+      ga('send', 'pageview');
     </script>
  </body>
 </html>
