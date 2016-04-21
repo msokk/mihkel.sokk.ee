@@ -1,0 +1,11 @@
+0.0.0.0
+
+root /sokk
+
+log stdout
+errors stderr
+tls off
+
+git git@github.com:msokk/mihkel.sokk.ee {
+  hook /deploy {$HOOK_SECRET}
+}
